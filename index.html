@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Day Care Express</title>
+    <meta
+      name="description"
+      content="Day Care Express is a licensed family child care in Langley, BC. Small-group care, CCFRI parent fees, and a home setting — where little ones grow and thrive."
+    />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f6f7f9;
+        --fg: #1c2330;
+        --muted: #5b6770;
+        --subtle: #8a949c;
+        --engine: #e85d4c;
+        --engine-hot: #d44b3b;
+        --rail-red: #e85d4c;
+        --rail-orange: #f4a259;
+        --rail-yellow: #f2c14e;
+        --rail-green: #3ddc97;
+        --rail-blue: #4c9be8;
+        --rail-violet: #7b6cf6;
+        --track: #d7dde3;
+        --shadow: 0 0 0 1px rgba(28, 35, 48, 0.06), 0 1px 2px -1px rgba(28, 35, 48, 0.06),
+          0 2px 4px 0 rgba(28, 35, 48, 0.04);
+        --display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+        --sans: "Nunito", "Segoe UI", system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+      p { text-wrap: pretty; }
+      a { color: inherit; }
+      .rail { display: flex; height: 6px; }
+      .rail span { flex: 1; }
+      .rail-sm { height: 4px; }
+      header {
+        position: sticky; top: 0; z-index: 20;
+        background: rgba(255,255,255,.95);
+        backdrop-filter: blur(8px);
+      }
+      .bar {
+        max-width: 1120px; margin: 0 auto; padding: 12px 20px;
+        display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .brand strong { display: block; font-family: var(--display); font-size: 1.15rem; }
+      .brand small { display: none; color: var(--muted); }
+      nav a {
+        text-decoration: none; font-weight: 700;
+        padding: 10px 16px; border-radius: 999px; font-size: .9rem;
+        min-height: 44px; display: inline-flex; align-items: center;
+      }
+      nav.desktop { display: none; gap: 8px; }
+      nav.mobile {
+        display: flex; gap: 8px; overflow-x: auto; padding: 0 20px 12px;
+      }
+      nav.mobile a { white-space: nowrap; }
+      .tab-red { background: var(--rail-red); color: #fff; }
+      .tab-orange { background: var(--rail-orange); color: var(--fg); }
+      .tab-yellow { background: var(--rail-yellow); color: var(--fg); }
+      .tab-green { background: var(--rail-green); color: var(--fg); }
+      .tab-blue { background: var(--rail-blue); color: #fff; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        height: 44px; padding: 0 20px; border-radius: 999px; font-weight: 600;
+        text-decoration: none; border: 0; cursor: pointer; font-family: inherit;
+        font-size: .95rem;
+      }
+      .btn-primary { background: var(--engine); color: #fff; }
+      .btn-primary:hover { background: var(--engine-hot); }
+      .btn-outline { background: #fff; color: var(--fg); box-shadow: var(--shadow); }
+      main { max-width: 1120px; margin: 0 auto; padding: 0 20px 64px; }
+      .hero { padding: 36px 0 24px; }
+      .hero-grid { display: grid; gap: 28px; }
+      .hero-photo {
+        overflow: hidden; border-radius: 32px; background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .hero-photo img { display: block; width: 100%; height: auto; }
+      .kicker { color: var(--engine); font-weight: 700; font-size: .9rem; letter-spacing: .02em; }
+      h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.12; max-width: 16ch; margin-top: 10px; }
+      .lede { color: var(--muted); font-size: 1.15rem; max-width: 42ch; line-height: 1.6; margin-top: 16px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .track-wrap {
+        margin-top: 36px; background: var(--surface); border-radius: 32px;
+        padding: 24px 8px; overflow: hidden;
+      }
+      .train-chug { animation: chug 18s ease-in-out infinite alternate; }
+      @keyframes chug {
+        from { transform: translateX(-6%); }
+        to { transform: translateX(6%); }
+      }
+      section { padding: 56px 0; scroll-margin-top: 96px; }
+      h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin-top: 8px; max-width: 18ch; }
+      .grid-3, .grid-2, .facts { display: grid; gap: 14px; margin-top: 28px; }
+      .card {
+        background: var(--bg); border-radius: 28px; padding: 24px; box-shadow: var(--shadow);
+      }
+      .card h3 { font-size: 1.25rem; margin: 12px 0 8px; }
+      .card p, .muted { color: var(--muted); line-height: 1.55; }
+      .band { background: var(--surface); border-top: 1px solid #eceff2; border-bottom: 1px solid #eceff2; }
+      .band-inner { max-width: 1120px; margin: 0 auto; padding: 56px 20px; }
+      .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat { background: #fff; border-radius: 24px; padding: 20px; box-shadow: var(--shadow); }
+      .stat b { font-family: var(--display); font-size: 2.4rem; display: block; }
+      .swatch { display: block; width: 40px; height: 6px; border-radius: 99px; margin-bottom: 14px; }
+      .fact {
+        display: flex; gap: 12px; background: #fff; border-radius: 18px; padding: 14px 16px;
+        box-shadow: var(--shadow); align-items: flex-start;
+      }
+      .contact-box {
+        display: grid; gap: 28px; background: var(--surface); border-radius: 32px; padding: 28px;
+      }
+      address a { color: var(--engine); font-weight: 700; text-decoration: none; }
+      address .row { display: flex; gap: 12px; margin: 0 0 14px; }
+      form { display: grid; gap: 14px; }
+      label { font-size: .9rem; font-weight: 600; display: grid; gap: 6px; }
+      input, textarea {
+        height: 44px; border-radius: 12px; border: 1px solid #e5e8ec; padding: 0 12px;
+        font: inherit; box-shadow: var(--shadow); background: #fff; color: var(--fg);
+      }
+      textarea { height: auto; min-height: 112px; padding: 12px; border-radius: 16px; }
+      .two { display: grid; gap: 14px; }
+      .list { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+      .list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+      .tick { color: var(--rail-green); font-weight: 800; }
+      .bag { color: var(--rail-orange); font-weight: 800; }
+      .fees { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); }
+      .fees th, .fees td { text-align: left; padding: 18px 28px; border-bottom: 1px solid #eceff2; }
+      .fees th { color: var(--muted); font-size: .9rem; }
+      .fees td strong { font-family: var(--display); font-size: 1.6rem; }
+      .photo { overflow: hidden; border-radius: 32px; background: var(--surface); box-shadow: var(--shadow); }
+      .photo img { display: block; width: 100%; height: auto; }
+      .photo-lg { max-width: 48rem; margin: 28px auto 0; }
+      .photo-fees {
+        max-width: 48rem;
+        margin: 28px auto 0;
+        padding: 6px;
+        background: linear-gradient(90deg, var(--rail-red), var(--rail-orange), var(--rail-yellow), var(--rail-green), var(--rail-blue), var(--rail-violet));
+        box-shadow: none;
+      }
+      .photo-fees .rail { display: none; }
+      .photo-fees img {
+        margin-top: 0;
+        border-radius: 26px;
+        outline: none;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 28px;
+        padding: 0;
+        list-style: none;
+      }
+      .gallery li {
+        overflow: hidden;
+        border-radius: 24px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+      .gallery img {
+        display: block;
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+      .title-row { display: flex; align-items: center; gap: 16px; margin-top: 12px; }
+      .title-row img { width: 112px; height: 112px; object-fit: contain; }
+      .brand img { width: 48px; height: 48px; object-fit: contain; }
+      .about-wrap { background: var(--surface); border-radius: 36px; padding: 28px; }
+      .about-card { overflow: hidden; border-radius: 28px; box-shadow: var(--shadow); }
+      .about-card .bar { display: block; height: 8px; }
+      .about-card .body { padding: 22px; }
+      .tint-red { background: color-mix(in oklab, var(--rail-red) 16%, #fff); }
+      .tint-yellow { background: color-mix(in oklab, var(--rail-yellow) 22%, #fff); }
+      .tint-blue { background: color-mix(in oklab, var(--rail-blue) 16%, #fff); }
+      .icon-well { width: 48px; height: 48px; border-radius: 16px; background: #fff; display: grid; place-items: center; }
+      .icon-well i { width: 18px; height: 18px; border-radius: 6px; display: block; }
+      .ok { display: none; background: var(--surface); border-radius: 18px; padding: 18px; }
+      @media (min-width: 720px) {
+        .brand small { display: block; }
+        nav.desktop { display: flex; }
+        nav.mobile { display: none; }
+        .hero-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .gallery { grid-template-columns: 1fr 1fr; }
+        .gallery img { height: 240px; }
+        .band-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; }
+        .contact-box { grid-template-columns: .9fr 1.1fr; padding: 40px; }
+        .two { grid-template-columns: 1fr 1fr; }
+        .split { grid-template-columns: minmax(0, 22rem) 1fr; }
+      }
+      @media (min-width: 960px) {
+        .gallery { grid-template-columns: 1fr 1fr 1fr; }
+        .gallery-2 { grid-template-columns: 1fr 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .train-chug { animation: none; }
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="rail rail-sm" aria-hidden="true">
+        <span style="background:var(--rail-red)"></span>
+        <span style="background:var(--rail-orange)"></span>
+        <span style="background:var(--rail-yellow)"></span>
+        <span style="background:var(--rail-green)"></span>
+        <span style="background:var(--rail-blue)"></span>
+        <span style="background:var(--rail-violet)"></span>
+      </div>
+      <div class="bar">
+        <a class="brand" href="#top">
+          <img src="toy-train.jpg" width="80" height="80" alt="" />
+          <span>
+            <strong>Day Care Express</strong>
+            <small>Licensed family child care · small group</small>
+          </span>
+        </a>
+        <nav class="desktop" aria-label="Page">
+          <a class="tab-red" href="#about">About</a>
+          <a class="tab-orange" href="#photos">Photos</a>
+          <a class="tab-yellow" href="#included">Included</a>
+          <a class="tab-green" href="#fees">Fees</a>
+          <a class="tab-blue" href="#contact">Contact</a>
+        </nav>
+        <a class="btn btn-primary" href="mailto:Daycareexpressbc@hotmail.com">Email us</a>
+      </div>
+      <nav class="mobile" aria-label="Page (mobile)">
+        <a class="tab-red" href="#about">About</a>
+        <a class="tab-orange" href="#photos">Photos</a>
+        <a class="tab-yellow" href="#included">Included</a>
+        <a class="tab-green" href="#fees">Fees</a>
+        <a class="tab-blue" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="kicker">Licensed family child care in Langley, British Columbia</p>
+        <div class="title-row">
+          <img src="toy-train.jpg" width="280" height="280" alt="Colourful toy steam train" />
+          <h1>Day Care Express</h1>
+        </div>
+        <p class="lede">A small group of seven children in a home setting — not a busy centre.</p>
+        <div class="actions">
+          <span class="pill" style="margin-top:0">Now accepting new enrollments</span>
+          <a class="btn btn-primary" href="mailto:Daycareexpressbc@hotmail.com">Email us</a>
+          <a class="btn btn-outline" href="#fees">See parent fees</a>
+        </div>
+        <div class="hero-photo" style="margin-top:28px">
+          <img src="hero-playroom.jpg" width="1500" height="1000" alt="Day Care Express: Where Little Ones Grow and Thrive. Children playing with a rainbow wooden train, blocks, books, and toys." />
+        </div>
+        <div class="track-wrap">
+          <div class="train-chug">
+            <svg viewBox="0 0 720 168" role="img" aria-label="Rainbow train with a red engine and five colourful cars">
+              <line x1="12" y1="142" x2="708" y2="142" stroke="#d7dde3" stroke-width="6" stroke-linecap="round"/>
+              <line x1="28" y1="136" x2="28" y2="152" stroke="#e85d4c" stroke-width="4" stroke-linecap="round"/>
+              <line x1="68" y1="136" x2="68" y2="152" stroke="#f4a259" stroke-width="4" stroke-linecap="round"/>
+              <line x1="108" y1="136" x2="108" y2="152" stroke="#f2c14e" stroke-width="4" stroke-linecap="round"/>
+              <line x1="148" y1="136" x2="148" y2="152" stroke="#3ddc97" stroke-width="4" stroke-linecap="round"/>
+              <line x1="188" y1="136" x2="188" y2="152" stroke="#4c9be8" stroke-width="4" stroke-linecap="round"/>
+              <line x1="228" y1="136" x2="228" y2="152" stroke="#7b6cf6" stroke-width="4" stroke-linecap="round"/>
+              <line x1="268" y1="136" x2="268" y2="152" stroke="#e85d4c" stroke-width="4" stroke-linecap="round"/>
+              <line x1="308" y1="136" x2="308" y2="152" stroke="#f4a259" stroke-width="4" stroke-linecap="round"/>
+              <line x1="348" y1="136" x2="348" y2="152" stroke="#f2c14e" stroke-width="4" stroke-linecap="round"/>
+              <line x1="388" y1="136" x2="388" y2="152" stroke="#3ddc97" stroke-width="4" stroke-linecap="round"/>
+              <line x1="428" y1="136" x2="428" y2="152" stroke="#4c9be8" stroke-width="4" stroke-linecap="round"/>
+              <line x1="468" y1="136" x2="468" y2="152" stroke="#7b6cf6" stroke-width="4" stroke-linecap="round"/>
+              <line x1="508" y1="136" x2="508" y2="152" stroke="#e85d4c" stroke-width="4" stroke-linecap="round"/>
+              <line x1="548" y1="136" x2="548" y2="152" stroke="#f4a259" stroke-width="4" stroke-linecap="round"/>
+              <line x1="588" y1="136" x2="588" y2="152" stroke="#f2c14e" stroke-width="4" stroke-linecap="round"/>
+              <line x1="628" y1="136" x2="628" y2="152" stroke="#3ddc97" stroke-width="4" stroke-linecap="round"/>
+              <line x1="668" y1="136" x2="668" y2="152" stroke="#4c9be8" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="92" cy="14" rx="10" ry="6" fill="#d7dde3" opacity=".7"/>
+              <ellipse cx="108" cy="6" rx="14" ry="8" fill="#d7dde3" opacity=".45"/>
+              <path d="M28 108 L12 124 H118 L102 108 Z" fill="#F2C14E"/>
+              <rect x="32" y="48" width="92" height="62" rx="14" fill="#E85D4C"/>
+              <rect x="78" y="28" width="52" height="52" rx="12" fill="#D44B3B"/>
+              <rect x="96" y="10" width="16" height="22" rx="5" fill="#F4A259"/>
+              <circle cx="104" cy="8" r="6" fill="#F2C14E"/>
+              <circle cx="104" cy="52" r="12" fill="#fff"/>
+              <circle cx="104" cy="52" r="6" fill="#4C9BE8"/>
+              <circle cx="52" cy="122" r="11" fill="#2C3544"/><circle cx="100" cy="122" r="11" fill="#2C3544"/>
+              <rect x="132" y="82" width="14" height="6" rx="2" fill="#2C3544"/>
+              <rect x="142" y="52" width="92" height="58" rx="14" fill="#F4A259"/>
+              <circle cx="172" cy="78" r="10" fill="#fff"/><circle cx="204" cy="78" r="10" fill="#fff"/>
+              <circle cx="168" cy="122" r="11" fill="#2C3544"/><circle cx="208" cy="122" r="11" fill="#2C3544"/>
+              <rect x="240" y="82" width="14" height="6" rx="2" fill="#2C3544"/>
+              <rect x="250" y="52" width="92" height="58" rx="14" fill="#F2C14E"/>
+              <circle cx="280" cy="78" r="10" fill="#fff"/><circle cx="312" cy="78" r="10" fill="#fff"/>
+              <circle cx="276" cy="122" r="11" fill="#2C3544"/><circle cx="316" cy="122" r="11" fill="#2C3544"/>
+              <rect x="348" y="82" width="14" height="6" rx="2" fill="#2C3544"/>
+              <rect x="358" y="52" width="92" height="58" rx="14" fill="#3DDC97"/>
+              <circle cx="388" cy="78" r="10" fill="#fff"/><circle cx="420" cy="78" r="10" fill="#fff"/>
+              <circle cx="384" cy="122" r="11" fill="#2C3544"/><circle cx="424" cy="122" r="11" fill="#2C3544"/>
+              <rect x="456" y="82" width="14" height="6" rx="2" fill="#2C3544"/>
+              <rect x="466" y="52" width="92" height="58" rx="14" fill="#4C9BE8"/>
+              <circle cx="496" cy="78" r="10" fill="#fff"/><circle cx="528" cy="78" r="10" fill="#fff"/>
+              <circle cx="492" cy="122" r="11" fill="#2C3544"/><circle cx="532" cy="122" r="11" fill="#2C3544"/>
+              <rect x="564" y="82" width="14" height="6" rx="2" fill="#2C3544"/>
+              <rect x="574" y="52" width="92" height="58" rx="14" fill="#7B6CF6"/>
+              <circle cx="604" cy="78" r="10" fill="#fff"/><circle cx="636" cy="78" r="10" fill="#fff"/>
+              <circle cx="600" cy="122" r="11" fill="#2C3544"/><circle cx="640" cy="122" r="11" fill="#2C3544"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Welcome</h2>
+        <figure class="photo photo-lg">
+          <img src="flyer-welcome.jpg" width="1500" height="2235" alt="Day Care Express flyer: licensed family child care, why parents choose us, now accepting new enrollments" />
+        </figure>
+      </section>
+
+      <section id="about">
+        <div class="about-wrap">
+          <div class="rail" aria-hidden="true" style="height:6px;border-radius:99px;overflow:hidden">
+            <span style="background:var(--rail-red)"></span>
+            <span style="background:var(--rail-orange)"></span>
+            <span style="background:var(--rail-yellow)"></span>
+            <span style="background:var(--rail-green)"></span>
+            <span style="background:var(--rail-blue)"></span>
+            <span style="background:var(--rail-violet)"></span>
+          </div>
+          <p class="kicker" style="margin-top:22px">About</p>
+          <h2>A family daycare, on purpose.</h2>
+          <p class="lede">
+            Care happens in a real home in the Township of Langley.
+            Mornings are unhurried. Play is the work of the day. Parents know
+            who is looking after their child — the same familiar faces, every day.
+          </p>
+          <div class="grid-3">
+            <article class="about-card tint-red">
+              <span class="bar" style="background:var(--rail-red)"></span>
+              <div class="body">
+                <div class="icon-well"><i style="background:var(--rail-red)"></i></div>
+                <h3>Home, not a hallway</h3>
+                <p>One household, one rhythm. Children settle faster when the room already feels like a home.</p>
+              </div>
+            </article>
+            <article class="about-card tint-yellow">
+              <span class="bar" style="background:var(--rail-yellow)"></span>
+              <div class="body">
+                <div class="icon-well"><i style="background:var(--rail-orange)"></i></div>
+                <h3>Known by name</h3>
+                <p>A small group means we can follow a child’s pace — extra cuddles, extra time at the puzzle, extra outdoor air.</p>
+              </div>
+            </article>
+            <article class="about-card tint-blue">
+              <span class="bar" style="background:var(--rail-blue)"></span>
+              <div class="body">
+                <div class="icon-well"><i style="background:var(--rail-blue)"></i></div>
+                <h3>Mixed ages, gently</h3>
+                <p>Infants and preschoolers share the day the way siblings do — younger ones watch, older ones help, everyone belongs.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="photos">
+        <p class="kicker">Photos</p>
+        <h2>Our play space.</h2>
+        <p class="lede">A look inside Day Care Express — play mats, trains, stories, and a child-size table in a real home.</p>
+        <ul class="gallery">
+          <li><img src="gallery/gallery-01.jpg" width="1500" height="1125" alt="Playroom with alphabet mats, child-size table, toy kitchen, and ride-on car" /></li>
+          <li><img src="gallery/gallery-02.jpg" width="1500" height="1125" alt="Playroom with table, alphabet mats, toy kitchen, and train wall mural" /></li>
+          <li><img src="gallery/gallery-03.jpg" width="1500" height="1125" alt="Child-size table and chairs facing the play mats" loading="lazy" /></li>
+          <li><img src="gallery/gallery-04.jpg" width="1500" height="1125" alt="Four child chairs around a small table" loading="lazy" /></li>
+          <li><img src="gallery/gallery-05.jpg" width="1500" height="1125" alt="Playroom looking toward the entry and reading corner" loading="lazy" /></li>
+          <li><img src="gallery/gallery-06.jpg" width="1500" height="1125" alt="Ride-on car, fire station toys, and a kindness train wall mural" loading="lazy" /></li>
+          <li><img src="gallery/gallery-07.jpg" width="1500" height="1125" alt="Toy bins, red play kitchen, and activity cube" loading="lazy" /></li>
+          <li><img src="gallery/gallery-08.jpg" width="1500" height="1125" alt="Red play kitchen, food toys, and colourful storage bins" loading="lazy" /></li>
+          <li><img src="gallery/gallery-09.jpg" width="1500" height="1125" alt="Toy bins beside a marble run and play kitchen" loading="lazy" /></li>
+          <li><img src="gallery/gallery-10.jpg" width="1500" height="1125" alt="Play corner with activity cube, building blocks, and fire trucks" loading="lazy" /></li>
+          <li><img src="gallery/gallery-11.jpg" width="1500" height="1125" alt="Reading helps your mind bloom rainbow wall mural" loading="lazy" /></li>
+          <li><img src="gallery/gallery-12.jpg" width="1500" height="1125" alt="Reading mural above alphabet play mats" loading="lazy" /></li>
+          <li><img src="gallery/gallery-13.jpg" width="1500" height="1125" alt="Alphabet mats, toy train track, keyboard, and bookshelf" loading="lazy" /></li>
+          <li><img src="gallery/gallery-14.jpg" width="1500" height="1125" alt="Toy train on a figure-eight track beside alphabet mats" loading="lazy" /></li>
+          <li><img src="gallery/gallery-15.jpg" width="1500" height="1125" alt="Close-up of the toy steam train and track" loading="lazy" /></li>
+          <li><img src="gallery/gallery-16.jpg" width="1500" height="1125" alt="Keyboard by the window in the playroom" loading="lazy" /></li>
+          <li><img src="gallery/gallery-17.jpg" width="1500" height="1125" alt="Playroom looking toward the living area, high chair, and fireplace" loading="lazy" /></li>
+        </ul>
+      </section>
+    </main>
+
+    <div class="band" id="group">
+      <div class="band-inner">
+        <div>
+          <p class="kicker">Small group</p>
+          <h2>Group size: 7 children.</h2>
+          <p class="lede">We keep the group small on purpose — so play stays calm, meals stay sociable, and no one disappears into a crowd.</p>
+        </div>
+        <div class="stat">
+          <b>7</b>
+          <span class="muted">children</span>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section id="day">
+        <p class="kicker">A day here</p>
+        <h2>Simple days, on a gentle track.</h2>
+        <div class="grid-2">
+          <article class="card"><h3>Welcome</h3><p>A slow start, a familiar hello, and time to settle before the day opens up.</p></article>
+          <article class="card"><h3>Play & stories</h3><p>Open-ended toys, songs, and picture books. The rainbow train is never far from the rug.</p></article>
+          <article class="card"><h3>Outdoor play</h3><p>We are at the front of Routley Park. Children play there for outdoor time — playground, open green space, and walking paths.</p></article>
+          <article class="card"><h3>Rest & snack</h3><p>Parents provide lunch, main meals, and snacks. Quiet rest after a full morning.</p></article>
+        </div>
+        <ul class="gallery gallery-2">
+          <li><img src="park/park-playground.jpg" width="1500" height="843" alt="Playground at Routley Park in Langley — slides, climber, and rubber play surface" loading="lazy" /></li>
+          <li><img src="park/park-field.jpg" width="1500" height="843" alt="Playground and picnic area at Routley Park in Langley" loading="lazy" /></li>
+        </ul>
+      </section>
+
+      <section id="included">
+        <p class="kicker">What’s included</p>
+        <h2>Clear from the start.</h2>
+        <figure class="photo photo-lg">
+          <img src="flyer-included.jpg" width="1500" height="2230" alt="Day Care Express flyer showing what is included in the monthly fee and what parents provide" />
+        </figure>
+        <p class="lede" style="text-align:center;max-width:40rem;margin:20px auto 0">Parents provide lunch, main meals, and snacks.</p>
+      </section>
+
+      <section id="fees">
+        <p class="kicker">Parent fees</p>
+        <h2>CCFRI parent fees</h2>
+        <figure class="photo photo-fees">
+          <div class="rail" aria-hidden="true">
+            <span style="background:var(--rail-red)"></span>
+            <span style="background:var(--rail-orange)"></span>
+            <span style="background:var(--rail-yellow)"></span>
+            <span style="background:var(--rail-green)"></span>
+            <span style="background:var(--rail-blue)"></span>
+            <span style="background:var(--rail-violet)"></span>
+          </div>
+          <img src="flyer-fees.jpg" width="1500" height="2230" alt="Day Care Express CCFRI parent fees, 7:30 a.m. to 5:30 p.m. in Langley, BC: $581 for 0–18 months, $537 for 18–36 months, and $500 for 3 years to kindergarten. Automatic CCFRI reduction. Families do not apply." />
+        </figure>
+      </section>
+
+      <section id="contact">
+        <div class="contact-box">
+          <div>
+            <p class="kicker">Contact</p>
+            <h2>Message us about a tour.</h2>
+            <p class="lede">Now accepting new enrollments. Spaces are limited because the group is small. Happy to answer any other questions or book a visit.</p>
+            <address>
+              <p class="row">
+                <span>
+                  <strong>Day Care Express</strong><br />
+                  <span class="muted">Licensed family child care · small group of 7</span>
+                </span>
+              </p>
+              <p class="row">
+                <span>
+                  19886 70 Avenue<br />
+                  Langley, British Columbia<br />
+                  <span class="muted">At the front of Routley Park · Township of Langley</span>
+                </span>
+              </p>
+              <p class="row">
+                <span>
+                  <a href="mailto:Daycareexpressbc@hotmail.com">Daycareexpressbc@hotmail.com</a>
+                </span>
+              </p>
+              <p class="row">Monday to Friday, with flexible hours for working families</p>
+            </address>
+            <p style="margin-top:20px" class="actions">
+              <a class="btn btn-primary" href="mailto:Daycareexpressbc@hotmail.com">Email us</a>
+              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=19886%2070%20Avenue%2C%20Langley%2C%20British%20Columbia" target="_blank" rel="noreferrer">Open in maps</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="rail" aria-hidden="true">
+      <span style="background:var(--rail-red)"></span>
+      <span style="background:var(--rail-orange)"></span>
+      <span style="background:var(--rail-yellow)"></span>
+      <span style="background:var(--rail-green)"></span>
+      <span style="background:var(--rail-blue)"></span>
+      <span style="background:var(--rail-violet)"></span>
+    </div>
+    <footer>
+      <strong style="color:var(--fg);font-family:var(--display)">Day Care Express</strong>
+      · Where Little Ones Grow & Thrive · licensed family child care · Langley, BC
+      · <a href="mailto:Daycareexpressbc@hotmail.com">Daycareexpressbc@hotmail.com</a>
+    </footer>
+  </body>
+</html>
