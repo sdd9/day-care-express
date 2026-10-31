@@ -78,6 +78,7 @@
       .tab-orange { background: var(--rail-orange); color: var(--fg); }
       .tab-yellow { background: var(--rail-yellow); color: var(--fg); }
       .tab-green { background: var(--rail-green); color: var(--fg); }
+      .tab-violet { background: var(--rail-violet); color: #fff; }
       .tab-blue { background: var(--rail-blue); color: #fff; }
       .btn {
         display: inline-flex; align-items: center; justify-content: center;
@@ -165,7 +166,16 @@
         border-radius: 26px;
         outline: none;
       }
-      .drop-in {
+      .schedule { display: grid; gap: 12px; margin-top: 28px; padding: 0; list-style: none; }
+      .schedule li { background: var(--surface); border-radius: 24px; padding: 16px 20px; box-shadow: var(--shadow); }
+      .schedule time { display: block; font-weight: 800; color: var(--rail-violet); font-size: .9rem; }
+      .schedule h3 { margin-top: 4px; font-size: 1.2rem; }
+      .note { border-radius: 24px; padding: 18px 20px; line-height: 1.55; }
+      .note-green { background: color-mix(in oklab, var(--rail-green) 18%, #fff); }
+      .note-yellow { background: color-mix(in oklab, var(--rail-yellow) 22%, #fff); }
+      .note-blue { background: color-mix(in oklab, var(--rail-blue) 16%, #fff); }
+      .note-orange { background: color-mix(in oklab, var(--rail-orange) 18%, #fff); }
+      .note ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; }
         max-width: 48rem;
         margin: 24px auto 0;
         padding: 16px 20px;
@@ -180,6 +190,16 @@
         margin-top: 12px;
         background: color-mix(in oklab, var(--rail-blue) 16%, #fff);
       }
+      .schedule { display: grid; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
+      .schedule li { background: var(--surface); border-radius: 24px; padding: 16px 20px; box-shadow: var(--shadow); }
+      .schedule time { display: block; font-weight: 800; color: var(--rail-violet); font-size: .9rem; }
+      .schedule h3 { margin-top: 4px; font-size: 1.2rem; }
+      .note { border-radius: 24px; padding: 18px 20px; line-height: 1.55; }
+      .note-green { background: color-mix(in oklab, var(--rail-green) 18%, #fff); }
+      .note-yellow { background: color-mix(in oklab, var(--rail-yellow) 22%, #fff); }
+      .note-blue { background: color-mix(in oklab, var(--rail-blue) 16%, #fff); }
+      .note-orange { background: color-mix(in oklab, var(--rail-orange) 18%, #fff); }
+      .note ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; }
       .gallery {
         display: grid;
         grid-template-columns: 1fr;
@@ -259,6 +279,7 @@
           <a class="tab-red" href="#about">About</a>
           <a class="tab-orange" href="#photos">Photos</a>
           <a class="tab-yellow" href="#included">Included</a>
+          <a class="tab-violet" href="#curriculum">Curriculum</a>
           <a class="tab-green" href="#fees">Fees</a>
           <a class="tab-blue" href="#contact">Contact</a>
         </nav>
@@ -268,6 +289,7 @@
         <a class="tab-red" href="#about">About</a>
         <a class="tab-orange" href="#photos">Photos</a>
         <a class="tab-yellow" href="#included">Included</a>
+        <a class="tab-violet" href="#curriculum">Curriculum</a>
         <a class="tab-green" href="#fees">Fees</a>
         <a class="tab-blue" href="#contact">Contact</a>
       </nav>
@@ -461,6 +483,59 @@
           <img src="flyer-included.jpg" width="1500" height="2230" alt="Day Care Express flyer showing what is included in the monthly fee and what parents provide" />
         </figure>
         <p class="lede" style="text-align:center;max-width:40rem;margin:20px auto 0">Parents provide lunch, main meals, and snacks.</p>
+      </section>
+
+      <section id="curriculum">
+        <p class="kicker">Daily curriculum</p>
+        <h2>Ages 15 months to 60 months.</h2>
+        <p class="lede">A warm, predictable routine for toddlers through preschool. Free play, guided learning, outdoor time, meals, and rest. The day stays flexible for each child’s interests, energy, and stage.</p>
+        <p class="note note-green" style="margin-top:24px"><strong>Strict Fraser Health guidelines followed.</strong> Day Care Express is a licensed family child care program that adheres to Fraser Health Authority requirements for health, safety, hygiene, nutrition, supervision, staff qualifications, and programming. Our environment is regularly inspected.</p>
+        <ol class="schedule">
+          <li><time>7:30 – 8:15 AM</time><h3>Arrival, welcome & free play</h3><p class="muted">Warm greeting and health check. Hand hygiene upon arrival. Children settle in with free-choice activities including blocks, books, soft toys, and simple sensory bins.</p></li>
+          <li><time>8:15 – 8:45 AM</time><h3>Morning circle time</h3><p class="muted">Songs, finger plays, short stories, and simple language activities. We practice greetings, name recognition, and basic concepts (colors, shapes, weather) in a short, engaging group time.</p></li>
+          <li><time>8:45 – 10:00 AM</time><h3>Learning centers & structured play</h3><p class="muted">Rotating centers focused on fine motor skills, art (painting, playdough, crayons), dramatic play, puzzles, and music. Small-group or individual activities that encourage curiosity and early problem-solving.</p></li>
+          <li><time>10:00 – 10:20 AM</time><h3>Morning snack</h3><p class="muted">Handwashing followed by snack time. Parents provide all snacks. Children practice self-feeding skills and social interaction in a calm setting.</p></li>
+          <li><time>10:20 – 11:30 AM</time><h3>Outdoor play / gross motor</h3><p class="muted">Fresh air and active play in our safe outdoor space (or indoor gross motor alternative if weather is poor). Running, climbing, balls, push toys, and nature exploration support physical development and energy release.</p></li>
+          <li><time>11:30 – 11:45 AM</time><h3>Transition & lunch preparation</h3><p class="muted">Gentle 15-minute transition indoors. Diapering/potty, thorough handwashing, and quiet table activities while lunch is prepared.</p></li>
+          <li><time>11:45 AM – 12:30 PM</time><h3>Lunch</h3><p class="muted">Lunch time with opportunities for conversation and practicing table manners. Parents provide all meals. We support healthy eating habits and social skills.</p></li>
+          <li><time>12:30 – 12:45 PM</time><h3>Story time & wind down</h3><p class="muted">Quiet stories, soft music, and cuddles to help children transition into rest time.</p></li>
+          <li><time>12:45 – 2:45 PM</time><h3>Nap / rest time</h3><p class="muted">Calm, dim environment with individual cots or mats. Soft music and gentle support. Children rest or sleep according to their needs; early risers have quiet books.</p></li>
+          <li><time>2:45 – 3:15 PM</time><h3>Wake up, hygiene & afternoon snack</h3><p class="muted">Gentle wake-up, diapering/potty, handwashing, and afternoon snack. Parents provide all snacks.</p></li>
+          <li><time>3:15 – 4:15 PM</time><h3>Afternoon activities & free play</h3><p class="muted">Music and movement, sensory exploration, art, or outdoor play (weather permitting). Focus on creativity, language, and social interaction.</p></li>
+          <li><time>4:15 – 5:30 PM</time><h3>Quiet play, centers & departure</h3><p class="muted">Free choice of quiet activities (books, puzzles, soft toys). Parents are welcomed with a brief update on the child’s day. Hand hygiene at departure.</p></li>
+        </ol>
+        <div class="grid-2">
+          <article class="note note-yellow">
+            <h3>Daily learning</h3>
+            <ul>
+              <li><strong>Language & literacy.</strong> Songs, stories, naming, conversation, and early book awareness.</li>
+              <li><strong>Social-emotional.</strong> Sharing, turn-taking, expressing feelings, and building relationships.</li>
+              <li><strong>Physical.</strong> Running, climbing, balancing, stacking, scribbling, and playdough.</li>
+              <li><strong>Cognitive.</strong> Puzzles, blocks, cause-and-effect, and simple sorting.</li>
+              <li><strong>Creative arts.</strong> Painting, music, movement, and dramatic play.</li>
+              <li><strong>Self-help.</strong> Handwashing, feeding, and beginning potty awareness.</li>
+            </ul>
+          </article>
+          <article class="note note-blue">
+            <h3>Age adaptations</h3>
+            <ul>
+              <li><strong>15–24 months.</strong> Shorter group times, more sensory and parallel play, simpler songs, and closer adult support.</li>
+              <li><strong>2–3 years.</strong> Emerging language, simple turn-taking, art with larger tools, and active outdoor play.</li>
+              <li><strong>3–5 years.</strong> Longer circle time, cooperative play, early literacy and numeracy, and more independence.</li>
+              <li>Everyone follows the same daily rhythm, with support and materials matched to their level.</li>
+            </ul>
+          </article>
+        </div>
+        <article class="note note-orange" style="margin-top:14px">
+          <h3>Notes for families</h3>
+          <ul>
+            <li>The schedule is a guide and stays flexible.</li>
+            <li>Outdoor play happens daily when weather permits, with an indoor alternative when it does not.</li>
+            <li>Parents provide all meals and snacks. Please send nutritious, age-appropriate food in labeled containers.</li>
+            <li>Daily updates cover activities, meals, rest, and notable moments.</li>
+            <li>Handwashing, surface cleaning, and illness exclusion follow Fraser Health requirements.</li>
+          </ul>
+        </article>
       </section>
 
       <section id="fees">
